@@ -20,4 +20,21 @@ public class NeuralNet {
 		}
 	}
 	
+	public double[] feedForward(){
+		Matrix a = net[0];
+		for(int i = 1; i < net.length ;i++){
+			a = a.times(net[i]);
+		}
+		double[] out = a.getColumnPackedCopy();
+		return out;
+	}
+	
+	public double sigmoid(Matrix x, Matrix w, double b){
+		Matrix xw = x.times(w);
+		double z = xw.getColumnPackedCopy()[0];
+		z += b;
+		z = 1 / (1 + Math.pow(Math.E, z));
+		return z;
+	}
+	
 }
